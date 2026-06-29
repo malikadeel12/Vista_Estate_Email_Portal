@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vista Estate</title>
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f6f6f6;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #272727;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        table { border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+        img { border: 0; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; }
+        a { color: #439cb0; text-decoration: none; }
+        .wrapper {
+            width: 100%;
+            max-width: 640px;
+            margin: 0 auto;
+            background-color: #ffffff;
+        }
+        .header {
+            background-color: #f6f6f6;
+            padding: 36px 48px 32px;
+            text-align: center;
+            border-bottom: 3px solid #439cb0;
+        }
+        .header-logo { margin-bottom: 20px; text-align: center; }
+        .header-logo img { max-height: 52px; max-width: 200px; width: auto; display: inline-block; }
+        .body-section { padding: 40px 48px; }
+        .greeting {
+            font-size: 16px;
+            font-weight: 600;
+            color: #272727;
+            margin-bottom: 20px;
+        }
+        .body-text {
+            font-size: 15px;
+            color: #444444;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        .body-text strong { color: #272727; font-weight: 600; }
+        .divider { height: 1px; background-color: #e5e5e5; margin: 32px 0; }
+        .info-box {
+            background-color: #f8f9fa;
+            border-left: 3px solid #439cb0;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .info-box-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #272727;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .info-box-text {
+            font-size: 14px;
+            color: #555555;
+            line-height: 1.7;
+            margin: 0;
+        }
+        .info-box-text strong { color: #272727; font-weight: 600; }
+        .feature-table { width: 100%; margin: 24px 0; }
+        .feature-cell { padding: 16px; vertical-align: top; }
+        .feature-icon {
+            width: 36px;
+            height: 36px;
+            background-color: #439cb0;
+            border-radius: 8px;
+            text-align: center;
+            line-height: 36px;
+            margin-bottom: 10px;
+        }
+        .feature-icon svg { width: 18px; height: 18px; fill: #ffffff; vertical-align: middle; }
+        .feature-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #272727;
+            margin-bottom: 4px;
+        }
+        .feature-desc { font-size: 13px; color: #666666; line-height: 1.5; }
+        .cta-wrap {
+            text-align: center;
+            padding: 32px 48px;
+            background-color: #f6f6f6;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 14px 32px;
+            background-color: #439cb0;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+        .cta-sub { font-size: 13px; color: #888888; margin-top: 12px; }
+        .pricing-section { padding: 0 48px 40px; }
+        .pricing-header { text-align: center; margin-bottom: 28px; }
+        .pricing-title { font-size: 20px; font-weight: 700; color: #272727; margin: 0 0 6px; }
+        .pricing-subtitle { font-size: 13px; color: #888888; margin: 0; }
+        .pricing-table { width: 100%; border-spacing: 12px; border-collapse: separate; }
+        .pricing-card { background-color: #ffffff; border: 1px solid #e5e5e5; border-radius: 10px; padding: 24px 20px; text-align: center; vertical-align: top; }
+        .pricing-card-featured { background-color: #f0f8f9; border: 2px solid #439cb0; border-radius: 10px; padding: 24px 20px; text-align: center; vertical-align: top; position: relative; }
+        .pricing-badge { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); background-color: #439cb0; color: #ffffff; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 4px 14px; border-radius: 20px; }
+        .pricing-plan-name { font-size: 16px; font-weight: 700; color: #272727; margin: 0 0 10px; }
+        .pricing-fee { font-size: 28px; font-weight: 800; color: #439cb0; margin: 0 0 2px; line-height: 1; }
+        .pricing-fee-label { font-size: 12px; font-weight: 600; color: #666666; margin: 0 0 12px; }
+        .pricing-price { font-size: 13px; color: #888888; margin: 0 0 14px; }
+        .pricing-price-strike { text-decoration: line-through; color: #aaaaaa; }
+        .pricing-price strong { color: #272727; font-size: 18px; font-weight: 700; }
+        .pricing-desc { font-size: 12px; color: #666666; line-height: 1.6; margin: 0 0 14px; min-height: 52px; }
+        .pricing-features { list-style: none; margin: 0; padding: 0; text-align: left; }
+        .pricing-features li { font-size: 12px; color: #555555; padding: 4px 0; border-bottom: 1px solid #f0f0f0; }
+        .pricing-features li:last-child { border-bottom: none; }
+        .pricing-check { color: #439cb0; font-weight: 700; margin-right: 6px; }
+        .pricing-conversion { display: inline-block; background-color: #f0f8f9; color: #439cb0; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 4px; margin-top: 10px; }
+        .pricing-note { text-align: center; font-size: 12px; color: #888888; margin-top: 16px; }
+        .pricing-note strong { color: #439cb0; font-weight: 600; }
+        .footer {
+            background-color: #153e42;
+            padding: 36px 48px 28px;
+        }
+        .footer-logo { margin-bottom: 14px; }
+        .footer-logo img { height: 44px; width: auto; }
+        .footer-text {
+            font-size: 13px;
+            color: rgba(255,255,255,0.55);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        .footer-contact {
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 20px;
+        }
+        .footer-contact a { color: rgba(255,255,255,0.6); text-decoration: none; }
+        .footer-social { margin-bottom: 20px; }
+        .footer-social a {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            background-color: rgba(67,156,176,0.2);
+            border-radius: 6px;
+            text-align: center;
+            line-height: 32px;
+            margin-right: 6px;
+        }
+        .footer-social a svg { width: 14px; height: 14px; fill: #439cb0; vertical-align: middle; }
+        .footer-divider {
+            height: 1px;
+            background-color: rgba(255,255,255,0.08);
+            margin-bottom: 16px;
+        }
+        .footer-bottom { font-size: 11px; color: rgba(255,255,255,0.35); }
+        .footer-bottom a { color: rgba(255,255,255,0.35); text-decoration: none; margin-left: 14px; }
+        @media screen and (max-width: 600px) {
+            .header, .body-section, .cta-wrap, .footer {
+                padding-left: 24px !important;
+                padding-right: 24px !important;
+            }
+            .feature-cell {
+                display: block !important;
+                width: 100% !important;
+            }
+            .pricing-section { padding: 0 24px 32px !important; }
+            .pricing-card, .pricing-card-featured { display: block !important; width: 100% !important; margin-bottom: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+        <tr>
+            <td align="center" style="background-color: #f6f6f6; padding: 20px 0;">
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="640" class="wrapper" style="max-width: 640px;">
+
+                    <!-- Header -->
+                    <tr>
+                        <td class="header" style="background-color: #f6f6f6; padding: 36px 48px 32px; text-align: center; border-bottom: 3px solid #439cb0;">
+                            <div class="header-logo" style="margin-bottom: 20px; text-align: center;">
+                                <img src="https://i.ibb.co/yBBgBKSP/logo-official.png" alt="Vista Estate" style="max-height: 52px; max-width: 200px; width: auto; display: inline-block;">
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- Greeting -->
+                    <tr>
+                        <td class="body-section" style="padding: 40px 48px;">
+                            <p class="greeting" style="font-size: 16px; font-weight: 600; color: #272727; margin: 0 0 20px;">Dear {{client_name}},</p>
+
+                            <p class="body-text" style="font-size: 15px; color: #444444; line-height: 1.7; margin: 0 0 20px;">
+                                I hope you're doing well. I'm excited to share the Vista Estate with you. A platform offering top-tier lead generation services tailored for real estate professionals like you.
+                            </p>
+
+                            <p class="body-text" style="font-size: 15px; color: #444444; line-height: 1.7; margin: 0 0 20px;">
+                                In today's competitive real estate market, acquiring high-quality leads is essential to your business's success. At Vista Estate, we specialize in delivering multi-faceted, intent-verified leads tailored to your unique needs. By combining advanced technology with personalized strategies, we ensure you receive the most relevant and profitable opportunities.
+                            </p>
+
+                            <div class="divider" style="height: 1px; background-color: #e5e5e5; margin: 32px 0;"></div>
+
+                            <!-- How we generate leads -->
+                            <div class="info-box" style="background-color: #f8f9fa; border-left: 3px solid #439cb0; padding: 24px; margin: 24px 0;">
+                                <p class="info-box-title" style="font-size: 13px; font-weight: 700; color: #272727; margin: 0 0 12px; text-transform: uppercase; letter-spacing: 1px;">How we generate leads</p>
+                                <p class="info-box-text" style="font-size: 14px; color: #555555; line-height: 1.7; margin: 0;">
+                                    At Vista Estate, we generate leads through targeted homeowner databases, FSBOs, expired listings, probate records, lender inquiries, and other high-intent sources within your exclusive ZIP codes. Our ISA team then conducts outbound calls and email outreach to identify motivated buyers and sellers. Every prospect is screened, qualified, and their information is verified. We only refer leads to our realtor partners after confirming their interest and obtaining consent to be connected with an agent.
+                                </p>
+                            </div>
+
+                            <div class="divider" style="height: 1px; background-color: #e5e5e5; margin: 32px 0;"></div>
+
+
+                        </td>
+                    </tr>
+
+                    <!-- Pricing Section -->
+                    <tr>
+                        <td class="pricing-section" style="padding: 0 48px 40px;">
+                            <div class="pricing-header" style="text-align: center; margin-bottom: 28px;">
+                                <p class="pricing-title" style="font-size: 20px; font-weight: 700; color: #272727; margin: 0 0 6px;">Flexible Pricing Plans</p>
+                                <p class="pricing-subtitle" style="font-size: 13px; color: #888888; margin: 0;">Choose the plan that fits your business. No hidden fees, no surprises.</p>
+                            </div>
+                            <table class="pricing-table" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-spacing: 12px; border-collapse: separate;">
+                                <tr>
+                                    <!-- Core Plan -->
+                                    <td class="pricing-card" width="33.33%" style="background-color: #ffffff; border: 1px solid #e5e5e5; border-radius: 10px; padding: 24px 20px; text-align: center; vertical-align: top;">
+                                        <p class="pricing-plan-name" style="font-size: 16px; font-weight: 700; color: #272727; margin: 0 0 10px;">Core</p>
+                                        <p class="pricing-fee" style="font-size: 28px; font-weight: 800; color: #439cb0; margin: 0 0 2px; line-height: 1;">20%</p>
+                                        <p class="pricing-fee-label" style="font-size: 12px; font-weight: 600; color: #666666; margin: 0 0 12px;">Referral Fee</p>
+                                        <p class="pricing-price" style="font-size: 13px; color: #888888; margin: 0 0 14px;"><span class="pricing-price-strike" style="text-decoration: line-through; color: #aaaaaa;">$600</span> <strong style="color: #272727; font-size: 18px; font-weight: 700;">$349</strong> /yearly</p>
+                                        <p class="pricing-desc" style="font-size: 12px; color: #666666; line-height: 1.6; margin: 0 0 14px; min-height: 52px;">$349 setup fee, credited back toward your first referral payment. Works with both active buyers and sellers.</p>
+                                        <ul class="pricing-features" style="list-style: none; margin: 0; padding: 0; text-align: left;">
+                                            <li style="font-size: 12px; color: #555555; padding: 4px 0; border-bottom: 1px solid #f0f0f0;"><span class="pricing-check" style="color: #439cb0; font-weight: 700; margin-right: 6px;">&#10003;</span> 20 Verified Leads Yearly</li>
+                                            <li style="font-size: 12px; color: #555555; padding: 4px 0; border-bottom: 1px solid #f0f0f0;"><span class="pricing-check" style="color: #439cb0; font-weight: 700; margin-right: 6px;">&#10003;</span> ISA Verified Leads</li>
+                                            <li style="font-size: 12px; color: #555555; padding: 4px 0; border-bottom: 1px solid #f0f0f0;"><span class="pricing-check" style="color: #439cb0; font-weight: 700; margin-right: 6px;">&#10003;</span> Direct CRM Delivery</li>
+                                            <li style="font-size: 12px; color: #555555; padding: 4px 0; border-bottom: 1px solid #f0f0f0;"><span class="pricing-check" style="color: #439cb0; font-weight: 700; margin-right: 6px;">&#10003;</span> Lead Tracking Tools</li>
+                                            <li style="font-size: 12px; color: #555555; padding: 4px 0;"><span class="pricing-check" style="color: #439cb0; font-weight: 700; margin-right: 6px;">&#10003;</span> 22% Avg. Conversion</li>
+                                        </ul>
+                                    </td>
+                                    <!-- Growth Plan -->
+                                    <td class="pricing-card" width="33.33%" style="background-color: #ffffff; border: 1px solid #e5e5e5; border-radius: 10px; padding: 24px 20px; text-align: center; vertical-align: top;">
+                                        <p class="pricing-plan-name" style="font-size: 16px; font-weight: 700; color: #272727; margin: 0 0 10px;">Growth</p>
+                                        <p class="pricing-fee" style="font-size: 28px; font-weight: 800; color: #439cb0; margin: 0 0 2px; line-height: 1;">10%</p>
+                                        <p class="pricing-fee-label" style="font-size: 12px; font-weight: 600; color: #666666; margin: 0 0 12px;">Referral Fee</p>
+                                        <p class="pricing-price" style="font-size: 13px; color: #888888; margin: 0 0 14px;"><span class="pricing-price-strike" style="text-decoration: line-through; color: #aaaaaa;">$1,200</span> <strong style="color: #272727; font-size: 18px; font-weight: 700;">$749</strong> /yearly</p>
+                                        <p class="pricing-desc" style="font-size: 12px; color: #666666; line-height: 1.6; margin: 0 0 14px; min-height: 52px;">Works with both buyers and sellers. Our ISA team books pre-scheduled appointments directly into your calendar.</p>
+                                        <ul class="pricing-features" style="list-style: none; margin: 0; padding: 0; text-align: left;">
+                                            <li style="font-size: 12px; color: #555555; padding: 4px 0; border-bottom: 1px solid #f0f0f0;"><span class="pricing-check" style="color: #439cb0; font-weight: 700; margin-right: 6px;">&#10003;</span> 30 Booked Appointments/yr</li>
+                                            <li style="font-size: 12px; color: #555555; padding: 4px 0; border-bottom: 1px solid #f0f0f0;"><span class="pricing-check" style="color: #439cb0; font-weight: 700; margin-right: 6px;">&#10003;</span> ISA Verified Appointments</li>
+                                            <li style="font-size: 12px; color: #555555; padding: 4px 0; border-bottom: 1px solid #f0f0f0;"><span class="pricing-check" style="color: #439cb0; font-weight: 700; margin-right: 6px;">&#10003;</span> Full CRM Integration</li>
+                                            <li style="font-size: 12px; color: #555555; padding: 4px 0; border-bottom: 1px solid #f0f0f0;"><span class="pricing-check" style="color: #439cb0; font-weight: 700; margin-right: 6px;">&#10003;</span> Dashboard Access</li>
+                                            <li style="font-size: 12px; color: #555555; padding: 4px 0;"><span class="pricing-check" style="color: #439cb0; font-weight: 700; margin-right: 6px;">&#10003;</span> 30% Avg. Conversion</li>
+                                        </ul>
+                                    </td>
+                                    <!-- Elite Plan -->
+                                    <td class="pricing-card-featured" width="33.33%" style="background-color: #f0f8f9; border: 2px solid #439cb0; border-radius: 10px; padding: 24px 20px; text-align: center; vertical-align: top; position: relative;">
+                                        <div class="pricing-badge" style="position: absolute; top: -11px; left: 50%; transform: translateX(-50%); background-color: #439cb0; color: #ffffff; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 4px 14px; border-radius: 20px;">Premium</div>
+                                        <p class="pricing-plan-name" style="font-size: 16px; font-weight: 700; color: #272727; margin: 0 0 10px;">Elite</p>
+                                        <p class="pricing-fee" style="font-size: 28px; font-weight: 800; color: #439cb0; margin: 0 0 2px; line-height: 1;">5%</p>
+                                        <p class="pricing-fee-label" style="font-size: 12px; font-weight: 600; color: #666666; margin: 0 0 12px;">Referral Fee</p>
+                                        <p class="pricing-price" style="font-size: 13px; color: #888888; margin: 0 0 14px;"><span class="pricing-price-strike" style="text-decoration: line-through; color: #aaaaaa;">$1,800</span> <strong style="color: #272727; font-size: 18px; font-weight: 700;">$1,149</strong> /yearly</p>
+                                        <p class="pricing-desc" style="font-size: 12px; color: #666666; line-height: 1.6; margin: 0 0 14px; min-height: 52px;">For agents seeking flexible lead generation. Choose your demand &mdash; buyers, sellers, or both. Save $351.</p>
+                                        <ul class="pricing-features" style="list-style: none; margin: 0; padding: 0; text-align: left;">
+                                            <li style="font-size: 12px; color: #555555; padding: 4px 0; border-bottom: 1px solid #f0f0f0;"><span class="pricing-check" style="color: #439cb0; font-weight: 700; margin-right: 6px;">&#10003;</span> 36 Live Transfers/yr</li>
+                                            <li style="font-size: 12px; color: #555555; padding: 4px 0; border-bottom: 1px solid #f0f0f0;"><span class="pricing-check" style="color: #439cb0; font-weight: 700; margin-right: 6px;">&#10003;</span> ISA Verified Live Transfers</li>
+                                            <li style="font-size: 12px; color: #555555; padding: 4px 0; border-bottom: 1px solid #f0f0f0;"><span class="pricing-check" style="color: #439cb0; font-weight: 700; margin-right: 6px;">&#10003;</span> Advanced CRM Automation</li>
+                                            <li style="font-size: 12px; color: #555555; padding: 4px 0; border-bottom: 1px solid #f0f0f0;"><span class="pricing-check" style="color: #439cb0; font-weight: 700; margin-right: 6px;">&#10003;</span> Performance Dashboards</li>
+                                            <li style="font-size: 12px; color: #555555; padding: 4px 0;"><span class="pricing-check" style="color: #439cb0; font-weight: 700; margin-right: 6px;">&#10003;</span> 40% Avg. Conversion</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+                            <p class="pricing-note" style="text-align: center; font-size: 12px; color: #888888; margin-top: 16px;">All plans include a <strong style="color: #439cb0; font-weight: 600;">free consultation</strong>. No surprises, no hidden fees.</p>
+                        </td>
+                    </tr>
+
+                    <!-- ISA Verification Process -->
+                    <tr>
+                        <td class="body-section" style="padding: 40px 48px; background-color: #ffffff;">
+                            <div class="info-box" style="background-color: #f8f9fa; border-left: 3px solid #439cb0; padding: 24px; margin: 0;">
+                                <p class="info-box-title" style="font-size: 13px; font-weight: 700; color: #272727; margin: 0 0 12px; text-transform: uppercase; letter-spacing: 1px;">ISA Verification Process</p>
+                                <p class="info-box-text" style="font-size: 14px; color: #555555; line-height: 1.7; margin: 0 0 16px;">
+                                    Every lead is personally contacted and verified by our trained ISA team before being referred to an agent. We confirm the prospect's contact information, buying or selling intent, timeline, property details, and level of motivation. We also obtain their consent to be connected with a real estate professional, ensuring that every lead delivered has been qualified, verified, and approved for transfer.
+                                </p>
+                                <p class="info-box-text" style="font-size: 14px; color: #555555; line-height: 1.7; margin: 0 0 12px;">
+                                    <strong style="color: #272727; font-weight: 600;">Our ISA team asks key qualifying questions:</strong>
+                                </p>
+                                <ul style="margin: 0 0 16px 20px; padding: 0; list-style-type: disc;">
+                                    <li style="font-size: 14px; color: #555555; line-height: 1.7; margin-bottom: 6px;">Are they pre-approved?</li>
+                                    <li style="font-size: 14px; color: #555555; line-height: 1.7; margin-bottom: 6px;">What is their credit score?</li>
+                                    <li style="font-size: 14px; color: #555555; line-height: 1.7; margin-bottom: 6px;">Do they have any bankruptcies or foreclosures?</li>
+                                    <li style="font-size: 14px; color: #555555; line-height: 1.7; margin-bottom: 6px;">What is their annual income and employment status?</li>
+                                    <li style="font-size: 14px; color: #555555; line-height: 1.7; margin-bottom: 0;">Are they currently under contract with a realtor?</li>
+                                </ul>
+                                <p class="info-box-text" style="font-size: 14px; color: #555555; line-height: 1.7; margin: 0;">
+                                    <strong style="color: #272727; font-weight: 600;">This ensures we deliver motivated, intent-verified buyers and sellers.</strong>
+                                </p>
+                            </div>
+
+                            <!-- 3 Service Cards -->
+                            <table class="feature-table" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin: 32px 0 0;">
+                                <tr>
+                                    <!-- Card 1: Core Insights -->
+                                    <td class="feature-cell" width="33.33%" valign="top" style="padding: 12px; vertical-align: top;">
+                                        <div style="background-color: #ffffff; border: 1px solid #e5e5e5; border-radius: 10px; padding: 20px 16px; text-align: center;">
+                                            <div class="feature-icon" style="width: 40px; height: 40px; background-color: #439cb0; border-radius: 8px; text-align: center; line-height: 40px; margin: 0 auto 10px;">
+                                                <svg viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: #ffffff; vertical-align: middle;"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                                            </div>
+                                            <p class="feature-title" style="font-size: 14px; font-weight: 700; color: #272727; margin: 0 0 6px;">Core Insights</p>
+                                            <p style="font-size: 11px; font-weight: 700; color: #439cb0; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 10px;">Full Prospect Data</p>
+                                            <p class="feature-desc" style="font-size: 12px; color: #666666; line-height: 1.6; margin: 0;">We provide you with complete lead data including contact information, appointment time, and prospect details. You'll know exactly when your appointment is fixed and have all the information you need before every call.</p>
+                                        </div>
+                                    </td>
+                                    <!-- Card 2: Your Calendar -->
+                                    <td class="feature-cell" width="33.33%" valign="top" style="padding: 12px; vertical-align: top;">
+                                        <div style="background-color: #ffffff; border: 1px solid #e5e5e5; border-radius: 10px; padding: 20px 16px; text-align: center;">
+                                            <div class="feature-icon" style="width: 40px; height: 40px; background-color: #439cb0; border-radius: 8px; text-align: center; line-height: 40px; margin: 0 auto 10px;">
+                                                <svg viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: #ffffff; vertical-align: middle;"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm-8 4H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg>
+                                            </div>
+                                            <p class="feature-title" style="font-size: 14px; font-weight: 700; color: #272727; margin: 0 0 6px;">Your Calendar</p>
+                                            <p style="font-size: 11px; font-weight: 700; color: #439cb0; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 10px;">Scheduled Appointments</p>
+                                            <p class="feature-desc" style="font-size: 12px; color: #666666; line-height: 1.6; margin: 0;">If you're unavailable or the prospect can't talk right away, we'll schedule a call at their convenience and provide you with their details for timely follow-up. You don't have to fix appointments yourself &mdash; we handle it all for you.</p>
+                                        </div>
+                                    </td>
+                                    <!-- Card 3: Instant Connection -->
+                                    <td class="feature-cell" width="33.33%" valign="top" style="padding: 12px; vertical-align: top;">
+                                        <div style="background-color: #ffffff; border: 1px solid #e5e5e5; border-radius: 10px; padding: 20px 16px; text-align: center;">
+                                            <div class="feature-icon" style="width: 40px; height: 40px; background-color: #439cb0; border-radius: 8px; text-align: center; line-height: 40px; margin: 0 auto 10px;">
+                                                <svg viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: #ffffff; vertical-align: middle;"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                                            </div>
+                                            <p class="feature-title" style="font-size: 14px; font-weight: 700; color: #272727; margin: 0 0 6px;">Instant Connection</p>
+                                            <p style="font-size: 11px; font-weight: 700; color: #439cb0; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 10px;">Live Transfers</p>
+                                            <p class="feature-desc" style="font-size: 12px; color: #666666; line-height: 1.6; margin: 0;">When we identify a qualified lead, we connect you directly with the prospect through a live transfer, ensuring you receive a responsive and engaged lead every time.</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Important Policies -->
+                            <div class="divider" style="height: 1px; background-color: #e5e5e5; margin: 32px 0;"></div>
+
+                            <div style="margin: 24px 0;">
+                                <p class="info-box-title" style="font-size: 13px; font-weight: 700; color: #272727; margin: 0 0 16px; text-transform: uppercase; letter-spacing: 1px;">Important Policies</p>
+
+                                <!-- Policy 1 -->
+                                <div style="background-color: #ffffff; border: 1px solid #e5e5e5; border-radius: 10px; padding: 20px 24px; margin-bottom: 12px;">
+                                    <p style="font-size: 14px; font-weight: 700; color: #272727; margin: 0 0 8px;">1. Acceptance Policy</p>
+                                    <p style="font-size: 13px; color: #555555; line-height: 1.6; margin: 0;">You have 48 hours to accept or reject a lead. Only accepted leads will count toward your monthly or annual quota.</p>
+                                </div>
+
+                                <!-- Policy 2 -->
+                                <div style="background-color: #ffffff; border: 1px solid #e5e5e5; border-radius: 10px; padding: 20px 24px; margin-bottom: 12px;">
+                                    <p style="font-size: 14px; font-weight: 700; color: #272727; margin: 0 0 8px;">2. Exclusive Leads Policy</p>
+                                    <p style="font-size: 13px; color: #555555; line-height: 1.6; margin: 0;">These leads will be exclusive to you and will not be shared with anyone.</p>
+                                </div>
+
+                                <!-- Policy 3 -->
+                                <div style="background-color: #ffffff; border: 1px solid #e5e5e5; border-radius: 10px; padding: 20px 24px;">
+                                    <p style="font-size: 14px; font-weight: 700; color: #272727; margin: 0 0 8px;">3. Refund Policy</p>
+                                    <p style="font-size: 13px; color: #555555; line-height: 1.6; margin: 0;">For details, visit: <a href="https://vistaestate.shop/refund-policy" style="color: #439cb0; text-decoration: none; font-weight: 600;">https://vistaestate.shop/refund-policy</a></p>
+                                </div>
+
+                                <div class="divider" style="height: 1px; background-color: #e5e5e5; margin: 32px 0;"></div>
+
+                                <p class="body-text" style="font-size: 15px; color: #444444; line-height: 1.7; margin: 0 0 16px;">
+                                    We are confident that Vista Estate can help you achieve your business goals and surpass your expectations. I invite you to learn more about our services and explore how we can take your real estate business to new heights.
+                                </p>
+
+                                <p class="body-text" style="font-size: 15px; color: #444444; line-height: 1.7; margin: 0;">
+                                    Thank you for considering Vista Estate as your trusted partner in lead generation. We look forward to the opportunity to support your continued success.
+                                </p>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- CTA -->
+                    <tr>
+                        <td class="cta-wrap" style="text-align: center; padding: 32px 48px; background-color: #f6f6f6;">
+                            <a href="https://vistaestate.us/contactus" class="cta-button" style="display: inline-block; padding: 14px 32px; background-color: #439cb0; color: #ffffff; font-size: 14px; font-weight: 600; border-radius: 6px; text-decoration: none;">Book a Free Consultation</a>
+                            <p class="cta-sub" style="font-size: 13px; color: #888888; margin: 12px 0 0;">Questions? Reach us at <a href="mailto:support@vistaestate.shop" style="color: #439cb0;">support@vistaestate.shop</a></p>
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
