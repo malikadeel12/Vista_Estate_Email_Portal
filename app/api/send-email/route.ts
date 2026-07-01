@@ -33,39 +33,35 @@ export async function POST(request: NextRequest) {
 
     // SMTP Configuration (Hostinger)
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
+      host: process.env.SMTP_HOST || 'smtp.hostinger.com',
       port: parseInt(process.env.SMTP_PORT || '465'),
       secure: true, // SSL
       auth: {
-        user: process.env.SMTP_USER,
+        user: process.env.SMTP_USER || 'info@vistaestate.shop',
         pass: process.env.SMTP_PASS,
       },
     })
 
     const fromName = 'Vista Estate'
-    const fromEmail = process.env.SMTP_USER
+    const fromEmail = process.env.SMTP_USER || 'info@vistaestate.shop'
 
     const messageId = `vista-${Date.now()}@vistaestate.shop`
 
-    const headers = {
+    const mailOptions = {
       from: `"${fromName}" <${fromEmail}>`,
       to: clientEmail,
       subject: subject,
       html: emailHtml,
       headers: {
         'X-Mailer': 'Apple Mail (2.0.0)',
-        'X-Priority': '3',
-        'X-MSMail-Priority': 'Normal',
-        'Return-Path': fromEmail,
-        'Reply-To': fromEmail,
+        'Message-ID': messageId,
         'List-Unsubscribe': `<mailto:unsubscribe@vistaestate.shop?subject=Unsubscribe>`,
         'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
-        'Message-ID': messageId,
       },
     }
 
     // Send email
-    await transporter.sendMail(headers)
+    await transporter.sendMail(mailOptions)
 
     return NextResponse.json({ success: true })
   } catch (error) {
