@@ -56,12 +56,10 @@ export async function POST(request: NextRequest) {
         'X-Mailer': 'Vista-Estate-Email-Portal/1.0',
         'X-Priority': '3',
         'X-MSMail-Priority': 'Normal',
-        'Return-Path': fromEmail, // Important for SPF alignment
+        'Return-Path': fromEmail,
         'Reply-To': fromEmail,
         'List-Unsubscribe': `<mailto:unsubscribe@vistaestate.shop?subject=Unsubscribe>`,
         'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
-        'Auto-Submitted': 'auto-generated',
-        'Precedence': 'list',
       },
     }
 
