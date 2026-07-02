@@ -8,11 +8,25 @@ interface SendEmailFormProps {
   onError: (error: string) => void
 }
 
+const TEMPLATES = [
+  { id: 'vista-estate-info-email.html', name: 'Vista Estate Info', subject: 'Vista Estate - Premium Real Estate Leads for You' },
+  { id: 'follow-up-email.html', name: 'Follow Up Email', subject: 'Quick follow up regarding Vista Estate / Re: Vista Estate' },
+]
+
 export default function SendEmailForm({ onCancel, onSuccess, onError }: SendEmailFormProps) {
   const [clientName, setClientName] = useState('')
   const [clientEmail, setClientEmail] = useState('')
   const [subject, setSubject] = useState('Vista Estate - Premium Real Estate Leads for You')
+  const [template, setTemplate] = useState('vista-estate-info-email.html')
   const [loading, setLoading] = useState(false)
+
+  const handleTemplateChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selected = TEMPLATES.find(t => t.id === e.target.value)
+    if (selected) {
+      setTemplate(selected.id)
+      setSubject(selected.subject)
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -28,7 +42,7 @@ export default function SendEmailForm({ onCancel, onSuccess, onError }: SendEmai
       const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ clientName, clientEmail, subject }),
+        body: JSON.stringify({ clientName, clientEmail, subject, template }),
       })
 
       const data = await response.json()
@@ -38,6 +52,7 @@ export default function SendEmailForm({ onCancel, onSuccess, onError }: SendEmai
         setClientName('')
         setClientEmail('')
         setSubject('Vista Estate - Premium Real Estate Leads for You')
+        setTemplate('vista-estate-info-email.html')
       } else {
         onError(data.error || 'Failed to send email')
       }
@@ -82,6 +97,22 @@ export default function SendEmailForm({ onCancel, onSuccess, onError }: SendEmai
               placeholder="client@example.com"
               required
             />
+          </div>
+
+          <div className="form-group full-width">
+            <label htmlFor="template">Email Template <span>*</span></label>
+            <select
+              id="template"
+              value={template}
+              onChange={handleTemplateChange}
+              required
+            >
+              {TEMPLATES.map((t) => (
+                <option key={t.id} value={t.id}>
+                  {t.name}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="form-group full-width">

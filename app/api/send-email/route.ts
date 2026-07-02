@@ -5,7 +5,7 @@ import path from 'path'
 
 export async function POST(request: NextRequest) {
   try {
-    const { clientName, clientEmail, subject } = await request.json()
+    const { clientName, clientEmail, subject, template } = await request.json()
 
     if (!clientName || !clientEmail || !subject) {
       return NextResponse.json(
@@ -14,7 +14,6 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(clientEmail)) {
       return NextResponse.json(
@@ -23,8 +22,8 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Read the email template
-    const templatePath = path.join(process.cwd(), 'public', 'vista-estate-info-email.html')
+    const templateFile = template || 'vista-estate-info-email.html'
+    const templatePath = path.join(process.cwd(), 'public', templateFile)
     let emailHtml = fs.readFileSync(templatePath, 'utf-8')
 
     // Replace placeholders
